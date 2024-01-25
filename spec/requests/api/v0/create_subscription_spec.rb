@@ -28,6 +28,8 @@ RSpec.describe 'post request for /customers/:customer_id/subscriptions' do
       expect(attributes[:price]).to be_a(Float)
       expect(attributes[:status]).to be_a(Integer)
       expect(attributes[:frequency]).to be_a(Integer)
+      expect(attributes[:tea_id]).to be_a(Integer)
+      expect(attributes[:customer_id]).to be_a(Integer)
     end
   end
 end

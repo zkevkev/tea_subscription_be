@@ -25,7 +25,12 @@ RSpec.describe 'delete request for /customers/:customer_id/subscriptions/:id' do
       attributes = data[:attributes]
 
       expect(attributes).to be_a(Hash)
+      expect(attributes[:title]).to eq(subscription.title)
+      expect(attributes[:price]).to eq(subscription.price)
       expect(attributes[:status]).to eq(subscription.status)
+      expect(attributes[:frequency]).to eq(subscription.frequency)
+      expect(attributes[:tea_id]).to be_a(Integer)
+      expect(attributes[:customer_id]).to be_a(Integer)
     end
   end
 end

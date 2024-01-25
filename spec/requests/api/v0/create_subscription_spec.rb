@@ -25,10 +25,10 @@ RSpec.describe 'post request for /customers/:customer_id/subscriptions' do
       attributes = data[:attributes]
 
       expect(attributes).to be_a(Hash)
-      expect(attributes[:title]).to be_a(String)
-      expect(attributes[:price]).to be_a(Float)
-      expect(attributes[:status]).to be_a(Integer)
-      expect(attributes[:frequency]).to be_a(Integer)
+      expect(attributes[:title]).to eq(subscription.title)
+      expect(attributes[:price]).to eq(subscription.price)
+      expect(attributes[:status]).to eq(subscription.status)
+      expect(attributes[:frequency]).to eq(subscription.frequency)
       expect(attributes[:tea_id]).to be_a(Integer)
       expect(attributes[:customer_id]).to be_a(Integer)
     end

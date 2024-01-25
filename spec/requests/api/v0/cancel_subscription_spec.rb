@@ -10,8 +10,22 @@ RSpec.describe 'delete request for /customers/:customer_id/subscriptions/:id' do
 
       expect(response).to be_successful
       expect(response.status).to eq(200)
+      expect(subscription.status).to eq(2)
 
-      # try to find subscription by id? Test index endpoint for presence?
+      parsed = JSON.parse(response.body, symbolize_names: true)
+
+      expect(parsed).to be_a(Hash)
+
+      data = parsed[:data]
+
+      expect(data).to be_a(Hash)
+      expect(data[:type]).to eq('subscription')
+      expect(data[:id]).to be_a(String)
+
+      attributes = data[:attributes]
+
+      expect(attributes).to be_a(Hash)
+      expect(attributes[:status]).to eq(subscription.status)
     end
   end
 end

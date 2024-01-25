@@ -6,7 +6,7 @@ class Api::V0::Customers::SubscriptionsController < ApplicationController
     if subscription.save
       render json: SubscriptionSerializer.new(subscription), status: :created
     else
-      #errors
+      render json: { errors: subscription.errors }, status: :unprocessable_entity
     end
   end
 

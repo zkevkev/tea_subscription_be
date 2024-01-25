@@ -5,8 +5,9 @@ RSpec.describe 'post request for /customers/:customer_id/subscriptions' do
     it 'creates a new subscription for the customer' do
       customer = create(:customer)
       tea = create(:tea)
+      subscription = build(:subscription)
 
-      post "/api/v0/customers/#{customer.id}/subscriptions", params: { tea_id: tea.id }.to_json, headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
+      post "/api/v0/customers/#{customer.id}/subscriptions", params: { tea_id: tea.id, title: subscription.title, price: subscription.price, status: subscription.status, frequency: subscription.frequency }.to_json, headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
 
       expect(response).to be_successful
       expect(response.status).to eq(201)

@@ -1,7 +1,7 @@
 class Api::V0::Customers::SubscriptionsController < ApplicationController
   def create
     customer = Customer.find(params[:customer_id]) # could add error handling here
-    subscription = Subscription.new(subscription_params.merge(customer_id: params[:customer_id]))
+    subscription = Subscription.new(subscription_params)
 
     if subscription.save
       render json: SubscriptionSerializer.new(subscription), status: :created
@@ -21,7 +21,6 @@ class Api::V0::Customers::SubscriptionsController < ApplicationController
   private 
 
   def subscription_params 
-    params.require(:tea_id)
     params.permit(:title, :price, :status, :frequency, :customer_id, :tea_id)
   end 
 end

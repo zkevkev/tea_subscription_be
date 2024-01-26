@@ -1,24 +1,26 @@
-# README
+# Tea Subscription BE README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## Getting Started
 
-Things you may want to cover:
+- Fork this repository to your GitHub account.
+- Clone your forked repository by clicking on code and copying your SSH URL and typing 'git clone < your Github SSH >' into your terminal.
 
-* Ruby version
+## Endpoints
 
-* System dependencies
+### POST /customers/:customer_id/subscriptions
 
-* Configuration
+- This endpoint creates a new subscription for a customer and returns information about that subscription.
+  - Headers: 'Content-Type: application/json Accept: application/json'
+  - Return data: returns the title of the subscription plan, the price in $, the status (active or cancelled) and the the frequency in days.
 
-* Database creation
+### PATCH /customers/:customer_id/subscriptions/:subscription_id/cancel
 
-* Database initialization
+- This endpoint allows cancellation of an existing tea subscription.
+  - Headers: 'Content-Type: application/json Accept: application/json'
+  - Return data: returns the title of the subscription plan, the price in $, the status (cancelled) and the the frequency in days. 
 
-* How to run the test suite
+### GET /customers/:customer_id/subscriptions
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- This endpoint gives info for all subscriptions (active and cancelled) for a customer
+  - Headers: 'Content-Type: application/json Accept: application/json'
+  - Return data: returns the title of the subscription plan, the price in $, the status (cancelled) and the the frequency in days. 

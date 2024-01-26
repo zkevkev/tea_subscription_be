@@ -10,7 +10,7 @@ RSpec.describe 'delete request for /customers/:customer_id/subscriptions/:id' do
 
       expect(response).to be_successful
       expect(response.status).to eq(200)
-      expect(subscription.status).to eq(2)
+      expect(subscription.status).to eq('cancelled')
 
       parsed = JSON.parse(response.body, symbolize_names: true)
 

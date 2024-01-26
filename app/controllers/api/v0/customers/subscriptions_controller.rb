@@ -15,7 +15,7 @@ class Api::V0::Customers::SubscriptionsController < ApplicationController
   def destroy
     subscription = Subscription.find(params[:id])
 
-    if subscription.status == 1
+    if subscription.status == 'active'
       subscription.update!({ status: 2 })
       render json: SubscriptionSerializer.new(subscription), status: :ok
     else

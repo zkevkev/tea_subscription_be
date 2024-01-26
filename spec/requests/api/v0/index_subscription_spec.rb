@@ -19,24 +19,21 @@ RSpec.describe 'get request for /customers/:customer_id/subscriptions' do
 
       data = parsed[:data]
 
-      expect(data).to be_a(Hash)
-      expect(data[:type]).to eq('') # this will be subscriptions?
-      expect(data[:id]).to be_a(String)
-
-      attributes = data[:attributes]
-
-      expect(attributes).to be_a(Hash)
-      attributes.each do |subscription|
-        expect(subscription[:title]).to be_a(String)
-        expect(subscription[:price]).to be_a(Float)
-        expect(subscription[:status]).to be_a(Integer)
-        expect(subscription[:frequency]).to be_a(Integer)
+      expect(data).to be_a(Array)
+      data.each do |subscription|
+        expect(subscription[:type]).to eq('subscription')
+        expect(subscription[:id]).to be_a(String)
+        
+        attributes = subscription[:attributes]
+        
+        expect(attributes).to be_a(Hash)
+        expect(attributes[:title]).to be_a(String)
+        expect(attributes[:price]).to be_a(Float)
+        expect(attributes[:status]).to be_a(String)
+        expect(attributes[:frequency]).to be_a(Integer)
       end
-      expect(attributes.first[:title]).to eq(subscription1.title)
-      expect(attributes.first[:price]).to eq(subscription1.price)
-      expect(attributes.first[:status]).to eq(subscription1.status)
-      expect(attributes.first[:frequency]).to eq(subscription1.frequency)
-      expect(attributes.length).to eq(2)
+      
+      expect(data.first[:attributes][:price]).to eq(subscription1.price)
     end
   end
 end

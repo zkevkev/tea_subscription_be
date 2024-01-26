@@ -6,11 +6,10 @@ RSpec.describe 'delete request for /customers/:customer_id/subscriptions/:id' do
       customer = create(:customer)
       subscription = create(:subscription, customer: customer)
 
-      delete "/api/v0/customers/#{customer.id}/subscriptions/#{subscription.id}", headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
+      patch "/api/v0/customers/#{customer.id}/subscriptions/#{subscription.id}/cancel", headers: { 'Content-Type' => 'application/json', 'Accept' => 'application/json' }
 
       expect(response).to be_successful
       expect(response.status).to eq(200)
-      expect(subscription.status).to eq('cancelled')
 
       parsed = JSON.parse(response.body, symbolize_names: true)
 
@@ -27,7 +26,7 @@ RSpec.describe 'delete request for /customers/:customer_id/subscriptions/:id' do
       expect(attributes).to be_a(Hash)
       expect(attributes[:title]).to eq(subscription.title)
       expect(attributes[:price]).to eq(subscription.price)
-      expect(attributes[:status]).to eq(subscription.status)
+      expect(attributes[:status]).to eq('cancelled')
       expect(attributes[:frequency]).to eq(subscription.frequency)
       expect(attributes[:tea_id]).to be_a(Integer)
       expect(attributes[:customer_id]).to be_a(Integer)

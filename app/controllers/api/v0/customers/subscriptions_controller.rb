@@ -12,11 +12,11 @@ class Api::V0::Customers::SubscriptionsController < ApplicationController
     end
   end
 
-  def destroy
-    subscription = Subscription.find(params[:id])
+  def update
+    subscription = Subscription.find(params[:subscription_id])
 
     if subscription.status == 'active'
-      subscription.update!({ status: 2 })
+      subscription.update!(status: :cancelled)
       render json: SubscriptionSerializer.new(subscription), status: :ok
     else
       render json: { errors: 'subscription is already cancelled' }, status: :unprocessable_entity

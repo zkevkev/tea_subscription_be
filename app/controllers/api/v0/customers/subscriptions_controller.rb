@@ -16,7 +16,7 @@ class Api::V0::Customers::SubscriptionsController < ApplicationController
     subscription = Subscription.find(params[:id])
 
     if subscription.status == 1
-      subscription.status = 2
+      subscription.update!({ status: 2 })
       render json: SubscriptionSerializer.new(subscription), status: :ok
     else
       render json: { errors: 'subscription is already cancelled' }, status: :unprocessable_entity
